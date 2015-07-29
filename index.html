@@ -43,13 +43,9 @@
 		        	margin-right: 50px;
 		        }
 			</style>
-			<div align="right" id="options">
+		<div align="right" id="options">
 				<h2 align="center">Example Bar Chart</h2>
-	        	<select id="select" name="cars">
-					<option value="2014-15 Data">2014-15 Data</option>
-					<option value="2013-14 Data">2013-14 Data</option>
-				</select>
-				<input id="input" type="submit">
+				<button id="select">View 2013-14 Data</button>
 			</div>
 			<div class='chart'></div>
 			<script type="text/javascript">				
@@ -161,7 +157,7 @@
 				function update () {
 					get_dimensions();
 
-					if (d3.select("#select").property("value") == "2014-15 Data") {
+					if (d3.select("#select").text() == "View 2013-14 Data") {
 						d3.selectAll(".bar")
 						  .attr("width", function(d) { return x(d.y2014_15) - margin; });
 					} else {
@@ -181,19 +177,22 @@
 
 				function switch_up () {
 					
-					var year = d3.select("#select").property("value");
+					var year = d3.select("#select").text();
 					
-					if (year == "2013-14 Data") {	
+					if (year == "View 2013-14 Data") {	
 						d3.selectAll(".bar")
 						  .transition(4000)
 						  .attr("width", function(d) { return x(d.y2013_14) - margin; });
+						d3.select("#select").text("View 2014-15 Data");
+
 					} else {					
 						d3.selectAll(".bar")
 						  .transition(4000)
 						  .attr("width", function(d) { return x(d.y2014_15) - margin; });
+						d3.select("#select").text("View 2013-14 Data");
 					}
 				};
-				d3.select("#input").on("click", switch_up);
+				d3.select("#select").on("click", switch_up);
 
 				// Listen for resize and update chart
         		d3.select(window).on('resize', update); 
