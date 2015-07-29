@@ -106,7 +106,7 @@
 		          .attr('class', 'd3-tip')
 		          .offset([28,0])
 		          .html(function(d){
-		            if (d3.select("#select").property("value") == "2013-14 Data") {
+		            if (d3.select("#select").text() == "View 2014-15 Data") {
 		            	return d['y2013_14'];
 		            } else {
 		            	return d['y2014_15'];
